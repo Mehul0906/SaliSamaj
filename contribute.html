@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contribute - Swakul Sali Seva Samaj, Nashik Road</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+        
+        /* Navbar Styles */
+        .navbar {
+            background-color: rgba(44, 62, 80, 0.95) !important;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+        }
+
+        .navbar.scrolled {
+            padding: 10px 0;
+            background-color: var(--primary-color) !important;
+        }
+
+        .navbar-brand img {
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled .navbar-brand img {
+            height: 50px;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            margin: 0 10px;
+            position: relative;
+            padding: 5px 0 !important;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--light-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('images/pattern.png') repeat;
+            opacity: 0.1;
+        }
+        
+        .breadcrumb {
+            background-color: rgba(255,255,255,0.2);
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+        }
+        
+        .breadcrumb-item a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .breadcrumb-item a:hover {
+            color: var(--light-color);
+            transform: translateY(-2px);
+        }
+        
+        .breadcrumb-item.active {
+            color: var(--light-color);
+        }
+        
+        /* Contribution Cards */
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            margin-bottom: 20px;
+            height: 100%;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .icon-box {
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .icon-box-lg {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .card:hover .icon-box {
+            transform: rotate(15deg) scale(1.1);
+            background-color: var(--accent-color);
+        }
+        
+        /* Form Styling */
+        .form-control, .form-select {
+            border-radius: 8px;
+            padding: 12px 15px;
+            border: 1px solid #ced4da;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+        
+        /* Accordion Styling */
+        .accordion-button:not(.collapsed) {
+            background-color: rgba(52, 152, 219, 0.1);
+            color: var(--primary-color);
+        }
+        
+        .accordion-button:focus {
+            box-shadow: none;
+            border-color: var(--primary-color);
+        }
+        
+        /* Contribution Types List */
+        .list-group-item {
+            transition: all 0.3s;
+        }
+        
+        .list-group-item:hover {
+            background-color: var(--light-color);
+            transform: translateX(5px);
+        }
+        
+        /* Submit Button */
+        .btn-primary {
+            background-color: var(--primary-color);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        /* Animation classes */
+        .fade-in {
+            opacity: 0;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transform: translateY(20px);
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Floating animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 99;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .scroll-indicator.active {
+            opacity: 1;
+        }
+        
+        .scroll-indicator:hover {
+            background-color: var(--accent-color);
+            transform: scale(1.1);
+        }
+        
+        /* Success Modal */
+        .modal-success .modal-header {
+            background-color: var(--primary-color);
+            color: white;
+            border-bottom: none;
+        }
+        
+        .modal-success .modal-body {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .modal-success .modal-body i {
+            font-size: 4rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background-color: var(--secondary-color);
+        }
+
+        footer h5 {
+            color: white;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        footer h5::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        footer p, footer li {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 0.5rem;
+        }
+
+        footer a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        footer a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        /* Social Links in Footer */
+        footer .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: all 0.3s;
+        }
+
+        footer .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+            color: white !important;
+        }
+
+        /* Newsletter Form */
+        footer .form-control {
+            background-color: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+        }
+
+        footer .form-control::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        footer .form-control:focus {
+            background-color: rgba(255,255,255,0.2);
+            color: white;
+            box-shadow: none;
+            border-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+
+
+    <!-- Page Header -->
+    <header class="page-header py-5">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold animate__animated animate__fadeInDown">Contribute</h1>
+            <nav aria-label="breadcrumb" class="d-flex justify-content-center">
+                <ol class="breadcrumb animate__animated animate__fadeInUp">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Contribute</li>
+                </ol>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contribute Content -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center mb-5 fade-in">
+                    <h2 class="fw-bold mb-4">Your Contribution for Community Development</h2>
+                    <p class="lead">Your financial support for Swakul Sali Seva Samaj's various social, educational, and cultural initiatives is extremely important. Your contribution enables us to help the needy, provide educational grants to youth, and organize cultural programs.</p>
+                </div>
+            </div>
+            
+            <div class="row mb-5">
+                <div class="col-md-4 mb-4 fade-in">
+                    <div class="card h-100 text-center border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="icon-box bg-primary text-white rounded-circle mx-auto mb-4">
+                                <i class="fas fa-rupee-sign fa-2x"></i>
+                            </div>
+                            <h3 class="h4 mb-3">Financial Contribution</h3>
+                            <p class="mb-0">You can help the society financially. Your contribution will be used for various welfare programs of the society.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4 fade-in" style="transition-delay: 0.2s;">
+                    <div class="card h-100 text-center border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="icon-box bg-primary text-white rounded-circle mx-auto mb-4">
+                                <i class="fas fa-hands-helping fa-2x"></i>
+                            </div>
+                            <h3 class="h4 mb-3">Volunteer</h3>
+                            <p class="mb-0">Donate your time and skills. Participate in various programs organized by the society.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4 fade-in" style="transition-delay: 0.4s;">
+                    <div class="card h-100 text-center border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="icon-box bg-primary text-white rounded-circle mx-auto mb-4">
+                                <i class="fas fa-gift fa-2x"></i>
+                            </div>
+                            <h3 class="h4 mb-3">Material Donation</h3>
+                            <p class="mb-0">Help the needy in society by donating books, clothes, food grains or other useful items.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-6 mb-5 mb-lg-0 fade-in">
+                    <div class="card shadow-sm">
+                        <div class="card-body p-4">
+                            <h3 class="card-title mb-4">Contribution Form</h3>
+                            <form id="contributeForm">
+                                <div class="mb-3">
+                                    <label for="contributeName" class="form-label">Your Name</label>
+                                    <input type="text" class="form-control" id="contributeName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contributeEmail" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="contributeEmail" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contributePhone" class="form-label">Mobile Number</label>
+                                    <input type="tel" class="form-control" id="contributePhone" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contributeType" class="form-label">Type of Contribution</label>
+                                    <select class="form-select" id="contributeType" required>
+                                        <option selected disabled value="">Select...</option>
+                                        <option value="financial">Financial Contribution</option>
+                                        <option value="volunteer">Volunteer</option>
+                                        <option value="material">Material Donation</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3" id="amountField" style="display: none;">
+                                    <label for="contributeAmount" class="form-label">Amount (₹)</label>
+                                    <input type="number" class="form-control" id="contributeAmount">
+                                </div>
+                                <div class="mb-3" id="materialField" style="display: none;">
+                                    <label for="contributeMaterial" class="form-label">Details of Items to Donate</label>
+                                    <textarea class="form-control" id="contributeMaterial" rows="3"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contributeMessage" class="form-label">Additional Information</label>
+                                    <textarea class="form-control" id="contributeMessage" rows="3"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-hand-holding-heart me-2"></i> Make Contribution
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 fade-in" style="transition-delay: 0.2s;">
+                    <div class="card shadow-sm">
+                        <div class="card-body p-4">
+                            <h3 class="card-title mb-4">Payment Methods</h3>
+                            <div class="accordion" id="paymentMethods">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingOne">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                            <i class="fas fa-university me-2"></i> Bank Transfer
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#paymentMethods">
+                                        <div class="accordion-body">
+                                            <p>You can directly transfer amount to the following bank account:</p>
+                                            <ul class="list-unstyled">
+                                                <li><strong>Bank Name:</strong> State Bank of India</li>
+                                                <li><strong>Branch:</strong> Nashik Road</li>
+                                                <li><strong>Account Name:</strong> Swakul Sali Seva Samaj</li>
+                                                <li><strong>Account Number:</strong> 123456789012</li>
+                                                <li><strong>IFSC Code:</strong> SBIN0001234</li>
+                                            </ul>
+                                            <p class="mb-0">After transfer, please email the receipt copy to us.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                            <i class="fas fa-mobile-alt me-2"></i> UPI Payment
+                                        </button>
+                                    </h2>
+                                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#paymentMethods">
+                                        <div class="accordion-body">
+                                            <p>You can send money to the following UPI ID:</p>
+                                            <div class="d-flex align-items-center mb-3">
+                                                <img src="images/upi-icon.png" alt="UPI" height="40" class="me-3">
+                                                <div>
+                                                    <h5 class="mb-0">swakulsamaj@upi</h5>
+                                                    <small class="text-muted">Society's UPI ID</small>
+                                                </div>
+                                            </div>
+                                            <p class="mb-0">Please include your name and contact number in the payment notes.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingThree">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                                            <i class="fas fa-money-bill-wave me-2"></i> Check/Demand Draft
+                                        </button>
+                                    </h2>
+                                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#paymentMethods">
+                                        <div class="accordion-body">
+                                            <p>You can send a check or demand draft in the name of "Swakul Sali Seva Samaj":</p>
+                                            <address class="mb-4">
+                                                <strong>Address:</strong><br>
+                                                Swakul Sali Seva Samaj,<br>
+                                                Samaj Bhavan, Nashik Road,<br>
+                                                District - Ahmednagar,<br>
+                                                Maharashtra - 422101
+                                            </address>
+                                            <p class="mb-0">Please write your name, address and contact number on the back of the check.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- <div class="card mt-4 shadow-sm">
+                        <div class="card-body p-4">
+                            <h3 class="card-title mb-4">Contribution Types</h3>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    One-time Contribution
+                                    <span class="badge bg-primary rounded-pill">Popular</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Monthly Contribution
+                                    <span class="badge bg-secondary rounded-pill">Regular</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Annual Contribution
+                                    <span class="badge bg-secondary rounded-pill">Convenient</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Contribution for Special Projects
+                                    <span class="badge bg-secondary rounded-pill">Targeted</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            
+            <div class="row mt-5 fade-in" style="transition-delay: 0.4s;">
+                <div class="col-12">
+                    <div class="card bg-light border-0">
+                        <div class="card-body p-5 text-center">
+                            <h2 class="fw-bold mb-4">How Your Contribution Helps</h2>
+                            <div class="row">
+                                <div class="col-md-3 mb-4">
+                                    <div class="icon-box-lg bg-primary text-white rounded-circle mx-auto mb-3">
+                                        <i class="fas fa-graduation-cap fa-2x"></i>
+                                    </div>
+                                    <h5>Educational Grants</h5>
+                                </div>
+                                <div class="col-md-3 mb-4">
+                                    <div class="icon-box-lg bg-primary text-white rounded-circle mx-auto mb-3">
+                                        <i class="fas fa-utensils fa-2x"></i>
+                                    </div>
+                                    <h5>Food Donation</h5>
+                                </div>
+                                <div class="col-md-3 mb-4">
+                                    <div class="icon-box-lg bg-primary text-white rounded-circle mx-auto mb-3">
+                                        <i class="fas fa-heartbeat fa-2x"></i>
+                                    </div>
+                                    <h5>Medical Assistance</h5>
+                                </div>
+                                <div class="col-md-3 mb-4">
+                                    <div class="icon-box-lg bg-primary text-white rounded-circle mx-auto mb-3">
+                                        <i class="fas fa-tshirt fa-2x"></i>
+                                    </div>
+                                    <h5>Clothing Donation</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content modal-success">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thank You!</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <i class="fas fa-check-circle"></i>
+                    <h4 class="mt-3">Contribution Received</h4>
+                    <p>We appreciate your support for our community.</p>
+                    <button type="button" class="btn btn-primary mt-3" data-bs-dismiss="modal">Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll to top button -->
+    <div class="scroll-indicator" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Scroll to top button
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('active');
+            } else {
+                scrollToTopBtn.classList.remove('active');
+            }
+        });
+        
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Show/hide fields based on contribution type
+        document.getElementById('contributeType').addEventListener('change', function() {
+            const type = this.value;
+            document.getElementById('amountField').style.display = type === 'financial' ? 'block' : 'none';
+            document.getElementById('materialField').style.display = type === 'material' ? 'block' : 'none';
+        });
+        
+        // Form submission
+        const contributeForm = document.getElementById('contributeForm');
+        const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+        
+        contributeForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Simulate form submission
+            setTimeout(() => {
+                successModal.show();
+                contributeForm.reset();
+            }, 1000);
+        });
+        
+        // Animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const appearOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+        
+        const appearOnScroll = new IntersectionObserver((entries, appearOnScroll) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('visible');
+                    appearOnScroll.unobserve(entry.target);
+                }
+            });
+        }, appearOptions);
+        
+        fadeElements.forEach(fader => {
+            appearOnScroll.observe(fader);
+        });
+        
+        // Phone number formatting
+        const phoneInput = document.getElementById('contributePhone');
+        
+        phoneInput.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 10) value = value.substring(0, 10);
+            
+            let formattedValue = '';
+            if (value.length > 0) {
+                formattedValue = `+91 ${value.substring(0, 5)} ${value.substring(5)}`;
+            }
+            
+            e.target.value = formattedValue.trim();
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
